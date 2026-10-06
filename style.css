@@ -10,6 +10,28 @@
 .border_box{
     border: 3px solid #2196F3;
     padding: 20px;
-    text-align: center ;
     margin-bottom: 10px;
+}
+
+#header_afp{
+    text-align: center;
+}
+
+.layout-container{
+    display: flex;
+    gap: 20px;
+
+}
+
+#main-content{
+    flex: 1;
+    /* height: max-content; */
+}
+
+a{
+    color: black; 
+}
+
+a:hover{
+    color: blue; 
 }
