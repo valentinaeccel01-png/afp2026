@@ -43,4 +43,7 @@ a, a:hover{
 
 .card{
     border: solid 2px red;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
