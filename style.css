@@ -47,3 +47,8 @@ a, a:hover{
     border-radius: 10px;
     cursor: pointer;
 }
+
+.bg-green{
+    background-color: forestgreen;
+    color: black;
+}
