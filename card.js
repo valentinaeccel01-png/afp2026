@@ -114,37 +114,33 @@ function createCardElement(cardData){
         const img = document.createElement("img");
         img.src = cardData.contenuto.immagine;
         img.alt = "Immagine di esempio";
-        img.width = 200;
+        img.width = 150;
         cardElement.appendChild(img);
     }
 
     return cardElement;
 }
 
-cardList.forEach((item) => {
-    // Crea elemento Card dai dati dell'oggetto item
-    const cardTmp = createCardElement(item);
-
-    // Aggiungi evento click per cambiare lo sfondo della card
-    cardTmp.addEventListener("click",() =>{
-        cardTmp.classList.toggle("bg-green");
-    });
-
-    // Aggiungi la card al contenitore principale
+const renderizzaCard = (cardList) => {
+    cardContainer.innerHTML= "";
+    cardList.forEach((item) => {
+       const cardTmp = createCardElement(item);
+       cardTmp.addEventListener("click",() => {
+        cardTmp.classList.toggle("card-active")
+       }) 
+    })
     cardContainer.appendChild(cardTmp);
-});
+}
+
+renderizzaCard(cardList);
 
 
 function soloImmagini(){
     console.log("Mostra solo immagini");
-    cardContainer.innerHTML = "";
 
-    cardList.forEach((item) => {
-        if (item.contenuto.immagine){
-            const cardTmp = createCardElement(item);
-            cardContainer.appendChild(cardTmp);
-        }
-    });
+    const listTmp = cardList.filter(item => item.contenuto.immagine !== "");
+
+    renderizzaCard(listTmp);
 }
 
 function soloTesto(){
