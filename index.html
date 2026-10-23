@@ -1,64 +1,61 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-<!--    <script src="main.js"></script>-->
+  </head>
+  <body>
+    <header id="header_afp" class="border_box">
+      <h1>Alta Formazione Professionale</h1>
+      <p>AFP G.Marconi Rovereto</p>
+    </header>
 
-
-<header id="header_afp" class="border_box">
-    <h1>Alta Formazione Professionale</h1>
-    <p>AFP G.Marconi Rovereto</p>
-</header>
-
-<div class="layout-container">
-    <aside class="border_box">
+    <div class="layout-container">
+      <aside class="border_box">
         <h2>Sidebar</h2>
         <!-- ul>li*3>a -->
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Notizie</a></li>
-            <li><a href="#">Lavora con noi</a></li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Notizie</a></li>
+          <li><a href="#">Lavora con noi</a></li>
         </ul>
-    </aside>
+      </aside>
 
-    <main id="main-content" class="border_box">
+      <main id="main-content" class="border_box">
         <h2>Main - Contenuto proncipale</h2>
         <p>Qui si fanno le multe</p>
 
-        <button id="btn-only-img" onclick="soloImmagini()">Solo immagini</button>
-        <button id="btn-only-text" onclick="soloTesto()">Solo testo</button>
-        <button id="btn-all" onclick="mostraTutto()">Tutto</button>
+        <button class="btn_selezione" id="btn-only-img">Solo immagini</button>
+        <button class="btn_selezione" id="btn-only-text" onclick="soloTesto()">Solo testo</button>
+        <button class="btn_selezione" id="btn-all" onclick="mostraTutto()">Tutto</button>
 
         <div id="card-container-main" class="card-container">
-            <div class="card">
-                <h3>Card 1</h3>
-                <p>Contenuto card numero 1</p>
-            </div>
-            <div class="card">
-                <h3>Card 2</h3>
-                <p>Contenuto card numero 2</p>
-            </div>
-            <div class="card">
-                <h3>Card 3</h3>
-                <p>Contenuto card numero 3</p>
-            </div>
-            <div class="card">
-                <h3>Card 4</h3>
-                <p>Contenuto card numero 4</p>
-            </div>
+          <div class="card">
+            <h3>Card 1</h3>
+            <p>Contenuto card numero 1</p>
+          </div>
+          <div class="card">
+            <h3>Card 2</h3>
+            <p>Contenuto card numero 2</p>
+          </div>
+          <div class="card">
+            <h3>Card 3</h3>
+            <p>Contenuto card numero 3</p>
+          </div>
+          <div class="card">
+            <h3>Card 4</h3>
+            <p>Contenuto card numero 4</p>
+          </div>
         </div>
-    </main>
-</div>
+      </main>
+    </div>
 
-<footer class="border_box">
-    Footer - Vale Eccel &copy; 2026 - UF07: Programmazione WEB
-</footer>
+    <footer class="border_box">
+      Footer - Rocchio Pietro &copy; 2026 - UF07: Programmazione WEB
+    </footer>
 
-<script src="card.js"></script>
-</body>
+    <script src="card.js"></script>
+  </body>
 </html>

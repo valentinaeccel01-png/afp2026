@@ -1,27 +1,12 @@
 "use strict";
 
-let card = {
-    contenuto: {
-        titolo: "Primo posto", // h1
-        sottotitolo:"Sci aplinismo", // h2
-        testo: "Primo classificato alle olimpiadi", // p
-        immagine: "" // img
-    },
-    bordo: {
-        colore: "",
-        stile: "",
-        dimensione: "",
-        raggio: ""
-    }
-}
-
 const cardList = [
     {
         contenuto: {
             titolo: "Primo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Primo classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "TriageColorEntity.png" // img
         },
         bordo: {
             colore: "",
@@ -35,7 +20,7 @@ const cardList = [
             titolo: "Secondo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Secondo classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "" // img
         },
         bordo: {
             colore: "",
@@ -63,7 +48,7 @@ const cardList = [
             titolo: "Quarto posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Quarto classificato alle olimpiadi", // p
-            immagine: "" // img
+            immagine: "TriageColorEntity.png" // img
         },
         bordo: {
             colore: "",
@@ -73,20 +58,18 @@ const cardList = [
         }
     }
 ];
-
 const cardContainer = document.querySelector("#card-container-main");
 
-const listaFigli = cardContainer.children;
-const nFigliTot = listaFigli.length;
-``
+document.querySelector("#btn-only-img")
+    .addEventListener("click", soloImmagini);
+    // .addEventListener("click", () => soloImmagini())
 
-for (let i = 0; i < nFigliTot; i++) {
-    console.log(`Elemento figlio ${i}: `, listaFigli[0].children[0].textContent);
-    cardContainer.removeChild(listaFigli[0]);
-    // cardContainer.removeChild(listaFigli.item(i));
-}
+document.querySelector("#btn-only-text")
+    .addEventListener("click", soloTesto);
 
-// CREARE UN NUOVO ELEMENTO
+document.querySelector("#btn-all")
+    .addEventListener("click", mostraTutto);
+
 
 /**
  * Crea un elemento card basato sui dati forniti.
@@ -114,53 +97,55 @@ function createCardElement(cardData){
         const img = document.createElement("img");
         img.src = cardData.contenuto.immagine;
         img.alt = "Immagine di esempio";
-        img.width = 150;
+        img.width = 200;
         cardElement.appendChild(img);
     }
 
     return cardElement;
 }
 
-const renderizzaCard = (cardList) => {
-    cardContainer.innerHTML= "";
-    cardList.forEach((item) => {
-       const cardTmp = createCardElement(item);
-       cardTmp.addEventListener("click",() => {
-        cardTmp.classList.toggle("card-active")
-       }) 
-    })
-    cardContainer.appendChild(cardTmp);
+const renderizzaCards = (listaCard) => {
+    cardContainer.innerHTML = "";
+
+    listaCard.forEach((item) => {
+        // Crea elemento Card dai dati dell'oggetto item
+        const cardTmp = createCardElement(item);
+
+        // Aggiungi evento click per cambiare lo sfondo della card
+        // (item) => {} -- item => {}
+        cardTmp.addEventListener(
+            "click",
+            () => cardTmp.classList.toggle("card-active")
+        );
+
+        // Aggiungi la card al contenitore principale
+        cardContainer.appendChild(cardTmp);
+    });
 }
-
-renderizzaCard(cardList);
-
 
 function soloImmagini(){
     console.log("Mostra solo immagini");
+    const listTmp = cardList.filter(
+        item => item.contenuto.immagine !== ""
+    );
 
-    const listTmp = cardList.filter(item => item.contenuto.immagine !== "");
-
-    renderizzaCard(listTmp);
+    renderizzaCards(listTmp);
 }
 
 function soloTesto(){
     console.log("Mostra solo testo");
-    cardContainer.innerHTML = "";
 
-    cardList.forEach((item) => {
-        if(!item.contenuto.immagine){
-            const cardTmp = createCardElement(item);
-            cardContainer.appendChild(cardTmp);
-        }
-    })
+    const listaTmp = cardList.filter(
+        item => item.contenuto.immagine === ""
+    );
+
+    renderizzaCards(listaTmp);
 }
 
 function mostraTutto(){
     console.log("Mostra tutto");
-    cardContainer.innerHTML = "";
-
-    cardList.forEach((item) => {
-        const cardTmp = createCardElement(item);
-        cardContainer.appendChild(cardTmp);
-    });
+    renderizzaCards(cardList);
 }
+
+
+renderizzaCards(cardList);

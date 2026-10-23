@@ -4,13 +4,13 @@
 
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .border_box{
     border: 3px solid #2196F3;
     padding: 20px;
     margin-bottom: 10px;
+    /* text-align: center; */
 }
 
 #header_afp{
@@ -20,17 +20,11 @@
 .layout-container{
     display: flex;
     gap: 20px;
-
 }
 
 #main-content{
     flex: 1;
-    /* height: max-content; */
-}
-
-a, a:hover{
-    color: black;
-    color: blue;
+    /* height:max-content; */
 }
 
 .card-container{
@@ -42,9 +36,10 @@ a, a:hover{
 }
 
 .card{
-    border: solid 2px red;
+    border: solid 2px orange;
     padding: 10px;
-    border-radius: 10px;
+
+    border-radius: 15px;
     cursor: pointer;
 }
 
@@ -53,28 +48,13 @@ a, a:hover{
     color: black;
 }
 
-#btn-only-img{
-    border: 2px solid blue;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-}
-
-#btn-only-text{
-    border: 2px solid blue;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-}
-
-#btn-all{
-    border: 2px solid blue;
-    border-radius: 5px;
-    padding: 10px;
-    text-align: center;
-}
-
 .card-active{
     background-color: deeppink;
-    border: 8px  aqua;
+    border: 8px dotted aquamarine;
+}
+
+.btn_selezione{
+    padding: 10px;
+    border: solid 4px  blue;
+    border-radius: 15px;
 }
