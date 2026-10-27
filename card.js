@@ -6,7 +6,7 @@ const cardList = [
             titolo: "Primo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Primo classificato alle olimpiadi", // p
-            immagine: "TriageColorEntity.png" // img
+            immagine: "Federica_Brignone.jpg" // img
         },
         bordo: {
             colore: "",
@@ -48,6 +48,20 @@ const cardList = [
             titolo: "Quarto posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Quarto classificato alle olimpiadi", // p
+            immagine: "Federica_Brignone.jpg" // img
+        },
+        bordo: {
+            colore: "",
+            stile: "",
+            dimensione: "",
+            raggio: ""
+        }
+    },
+    {
+        contenuto: {
+            titolo: "Quinto", // h1
+            sottotitolo:"Sci aplinismo", // h2
+            testo: "Quarto classificato alle olimpiadi", // p
             immagine: "TriageColorEntity.png" // img
         },
         bordo: {
@@ -59,18 +73,63 @@ const cardList = [
     }
 ];
 const cardContainer = document.querySelector("#card-container-main");
+const filtroInput = document.querySelector("#filter-input");
 
-document.querySelector("#btn-only-img")
-    .addEventListener("click", soloImmagini);
-    // .addEventListener("click", () => soloImmagini())
+const btnImg = document.querySelector("#btn-only-img");
+const btnText = document.querySelector("#btn-only-text");
+const btnAll = document.querySelector("#btn-all");
 
-document.querySelector("#btn-only-text")
-    .addEventListener("click", soloTesto);
+const checkFiltri = document.querySelector("#enable-adv-filter")
 
-document.querySelector("#btn-all")
-    .addEventListener("click", mostraTutto);
+let adv_filter_enabled = false;
 
+btnImg.addEventListener("click", soloImmagini);
+//btnText.addEventListener("click", () => soloImmagini())
+btnText.addEventListener("click", soloTesto);
+btnAll.addEventListener("click", mostraTutto);
 
+filtroInput.addEventListener("input", (e) => {
+    resetAllFilterButton();
+    enableBtn(btnAll);
+    const txtDigitato = e.target.value.toLowerCase();
+
+    const cardTrovate = cardList.filter((item) => {
+        const title = item.contenuto.titolo.toLowerCase();
+        console.log(`Target: ${txtDigitato}, Titolo: ${title}`);
+
+        // return txtDigitato !== title; // Filtro puntuale
+        return title.includes(txtDigitato);
+    });
+
+    renderizzaCards(cardTrovate);
+})
+
+checkFiltri.addEventListener("click", (e) => {
+    adv_filter_enabled = e.target.checked;
+    console.log(adv_filter_enabled ? "Abilitato" : "Disabilitato");
+});
+
+function enableBtn(btn){
+    btn.classList.add("btn-active");
+}
+function disableBtn(btn){
+    btn.classList.remove("btn-active");
+}
+function resetAllFilterButton(){
+    disableBtn(btnImg);
+    disableBtn(btnText);
+    disableBtn(btnAll);
+}
+
+/**
+ * CLEAR -- rimuovo
+ * DISABLE --
+ *
+ */
+
+//
+// filtroInput["abilitato"] = true;
+// filtroInput.abilitato2 = true;
 /**
  * Crea un elemento card basato sui dati forniti.
  * @param cardData - Oggetto contenente i dati della card.
@@ -125,27 +184,32 @@ const renderizzaCards = (listaCard) => {
 
 function soloImmagini(){
     console.log("Mostra solo immagini");
+    resetAllFilterButton();
     const listTmp = cardList.filter(
         item => item.contenuto.immagine !== ""
     );
-
+    enableBtn(btnImg);
     renderizzaCards(listTmp);
 }
 
 function soloTesto(){
     console.log("Mostra solo testo");
-
+    resetAllFilterButton();
     const listaTmp = cardList.filter(
         item => item.contenuto.immagine === ""
     );
 
+    enableBtn(btnText);
     renderizzaCards(listaTmp);
 }
 
 function mostraTutto(){
     console.log("Mostra tutto");
+    resetAllFilterButton()
+    enableBtn(btnAll);
     renderizzaCards(cardList);
 }
 
 
 renderizzaCards(cardList);
+enableBtn(btnAll);

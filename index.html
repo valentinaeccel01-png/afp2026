@@ -27,9 +27,21 @@
         <h2>Main - Contenuto proncipale</h2>
         <p>Qui si fanno le multe</p>
 
-        <button class="btn_selezione" id="btn-only-img">Solo immagini</button>
-        <button class="btn_selezione" id="btn-only-text" onclick="soloTesto()">Solo testo</button>
-        <button class="btn_selezione" id="btn-all" onclick="mostraTutto()">Tutto</button>
+        <button id="btn-only-img">Solo immagini</button>
+        <button id="btn-only-text">Solo testo</button>
+        <button id="btn-all">Tutto</button>
+
+        <input
+          type="text"
+          id="filter-input"
+          placeholder="filtra per...."
+        >
+        <input
+          type="checkbox"
+          id="enable-adv-filter"
+          name="enable-adv-filter"
+        >
+        <label for="enable-adv-filter">Filtri avanzati</label>
 
         <div id="card-container-main" class="card-container">
           <div class="card">

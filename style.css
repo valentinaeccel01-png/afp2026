@@ -53,8 +53,6 @@
     border: 8px dotted aquamarine;
 }
 
-.btn_selezione{
-    padding: 10px;
-    border: solid 4px  blue;
-    border-radius: 15px;
+.btn-active{
+    background-color: coral;
 }
