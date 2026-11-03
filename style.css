@@ -56,3 +56,21 @@
 .btn-active{
     background-color: coral;
 }
+
+.form_input{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+#card-form{
+    border: solid 1px grey;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+
+}
+
+#card-form>div{
+
+}

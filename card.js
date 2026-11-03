@@ -6,7 +6,7 @@ const cardList = [
             titolo: "Primo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Primo classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "TriageColorEntity.png" // img
         },
         bordo: {
             colore: "",
@@ -48,7 +48,7 @@ const cardList = [
             titolo: "Quarto posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Quarto classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "TriageColorEntity.png" // img
         },
         bordo: {
             colore: "",
@@ -72,6 +72,7 @@ const cardList = [
         }
     }
 ];
+let cardListFiltered = [];
 const cardContainer = document.querySelector("#card-container-main");
 const filtroInput = document.querySelector("#filter-input");
 
@@ -82,6 +83,7 @@ const btnAll = document.querySelector("#btn-all");
 const checkFiltri = document.querySelector("#enable-adv-filter")
 
 let adv_filter_enabled = false;
+let txtFiler = "";
 
 btnImg.addEventListener("click", soloImmagini);
 //btnText.addEventListener("click", () => soloImmagini())
@@ -89,25 +91,43 @@ btnText.addEventListener("click", soloTesto);
 btnAll.addEventListener("click", mostraTutto);
 
 filtroInput.addEventListener("input", (e) => {
-    resetAllFilterButton();
-    enableBtn(btnAll);
-    const txtDigitato = e.target.value.toLowerCase();
+    txtFiler = e.target.value.toLowerCase();
+    console.log(e);
 
-    const cardTrovate = cardList.filter((item) => {
-        const title = item.contenuto.titolo.toLowerCase();
-        console.log(`Target: ${txtDigitato}, Titolo: ${title}`);
-
-        // return txtDigitato !== title; // Filtro puntuale
-        return title.includes(txtDigitato);
-    });
-
-    renderizzaCards(cardTrovate);
+    if (adv_filter_enabled){
+        cardListFiltered = Array.from(cardList);
+        filterCardByTitle(cardListFiltered, txtFiler);
+    }else {
+        resetAllFilterButton();
+        enableBtn(btnAll);
+        filterCardByTitle(cardListFiltered, txtFiler);
+    }
 })
+
+function filterCardByAdv(){
+    if (adv_filter_enabled){
+        filterCardByTitle(cardListFiltered, txtFiler);
+    }else {
+        filterCardByTitle(cardListFiltered, txtFiler);
+    }
+}
 
 checkFiltri.addEventListener("click", (e) => {
     adv_filter_enabled = e.target.checked;
     console.log(adv_filter_enabled ? "Abilitato" : "Disabilitato");
 });
+
+function filterCardByTitle(cardList, titolo){
+    const cardTrovate = cardList.filter((item) => {
+        const title = item.contenuto.titolo.toLowerCase();
+        // console.log(`Target: ${titolo}, Titolo: ${title}`);
+
+        // return txtDigitato !== title; // Filtro puntuale
+        return title.includes(titolo);
+    });
+
+    renderizzaCards(cardTrovate);
+}
 
 function enableBtn(btn){
     btn.classList.add("btn-active");
@@ -189,7 +209,12 @@ function soloImmagini(){
         item => item.contenuto.immagine !== ""
     );
     enableBtn(btnImg);
-    renderizzaCards(listTmp);
+
+
+    // triggerInputEvent();
+    saveCardListFiltered(listTmp);
+    filterCardByAdv();
+    // renderizzaCards(listTmp);
 }
 
 function soloTesto(){
@@ -200,7 +225,10 @@ function soloTesto(){
     );
 
     enableBtn(btnText);
-    renderizzaCards(listaTmp);
+    saveCardListFiltered(listaTmp);
+    // triggerInputEvent();
+    filterCardByAdv();
+    // renderizzaCards(listaTmp);
 }
 
 function mostraTutto(){
@@ -208,6 +236,26 @@ function mostraTutto(){
     resetAllFilterButton()
     enableBtn(btnAll);
     renderizzaCards(cardList);
+}
+
+function saveCardListFiltered(listTmp){
+    // if (Array.isArray(listTmp)){
+    //     if (adv_filter_enabled) {
+    //         // TODO: Check se '=' causa problemi
+    //         cardListFiltered = listTmp;
+    //     }
+    // }
+
+    if (!Array.isArray(listTmp)) return;
+    // if (!adv_filter_enabled) return;
+
+    // TODO: Check se '=' causa problemi
+    cardListFiltered = Array.from(listTmp);
+}
+
+function triggerInputEvent(){
+    const ev = new Event("input");
+    filtroInput.dispatchEvent(ev);
 }
 
 

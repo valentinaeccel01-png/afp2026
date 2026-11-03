@@ -28,6 +28,7 @@
         <p>Qui si fanno le multe</p>
 
         <button id="btn-only-img">Solo immagini</button>
+        <button id="btn-only-img-jpg">Solo JPG</button>
         <button id="btn-only-text">Solo testo</button>
         <button id="btn-all">Tutto</button>
 
@@ -42,6 +43,48 @@
           name="enable-adv-filter"
         >
         <label for="enable-adv-filter">Filtri avanzati</label>
+
+        <div>
+          <form action="" id="card-form">
+            <!-- 
+            titolo, sottotitolo, testo e img
+             -->
+            <h3>Creazione nuova card</h3>
+
+            <div class="form_input">
+               <label for="titolo">TITOLO</label>
+            <input id="titolo" type="text" placeholder="titolo della card" required>
+            </div>
+
+           <div class="form_input">
+             <label for="titolo">TITOLO</label>
+            <input id="titolo" type="text" placeholder="titolo della card" required>
+           </div>
+
+           <div class="form_input">
+            <label for="sottotitolo">SOTTOTITOLO</label>
+            <input type="text" name="" id="sottotitolo" placeholder="sottotitolo della card" required>
+           </div>
+
+           <div class="form_input">
+            <label for="testo">TESTO</label>
+            <input type="text" name="" id="testo" placeholder="testo della card" required>
+           </div>
+
+           <div class="form_input">
+             <label for="immagine">IMMAGINE</label>
+            <!-- <input type="text" name="" id="immagini" placeholder="immagine della card" required> -->
+            <select name="" id="immagine">
+              <option value="">nessuna immagine</option>
+              <option value="JPG">Iimmagine jpg</option>
+              <option value="PNG">Iimmagine png</option>
+            </select>
+           </div>
+
+            <button type="submit">Crea card</button>
+
+          </form>
+        </div>
 
         <div id="card-container-main" class="card-container">
           <div class="card">
@@ -68,6 +111,7 @@
       Footer - Rocchio Pietro &copy; 2026 - UF07: Programmazione WEB
     </footer>
 
-    <script src="card.js"></script>
+<!--    <script src="cardop.js"></script>-->
+    <script src="cardAdv.js"></script>
   </body>
 </html>
