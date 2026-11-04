@@ -1,11 +1,12 @@
 "use strict";
-const cardList = [
+let cardList = [
     {
+        id: "0",
         contenuto: {
             titolo: "Primo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Primo classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "gatto.png" // img
         },
         bordo: {
             colore: "",
@@ -15,6 +16,7 @@ const cardList = [
         }
     },
     {
+        id: "1",
         contenuto: {
             titolo: "Secondo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
@@ -29,6 +31,7 @@ const cardList = [
         }
     },
     {
+        id: "2",
         contenuto: {
             titolo: "Terzo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
@@ -43,11 +46,12 @@ const cardList = [
         }
     },
     {
+        id: "3",
         contenuto: {
             titolo: "Quarto posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Quarto classificato alle olimpiadi", // p
-            immagine: "gatto.png" // img
+            immagine: "Federica_Brignone.jpg" // img
         },
         bordo: {
             colore: "",
@@ -57,6 +61,7 @@ const cardList = [
         }
     },
     {
+        id: "4",
         contenuto: {
             titolo: "Quinto", // h1
             sottotitolo:"Sci aplinismo", // h2
@@ -79,6 +84,21 @@ const btnImg = document.querySelector("#btn-only-img");
 const btnImgJpg = document.querySelector("#btn-only-img-jpg");
 const btnText = document.querySelector("#btn-only-text");
 const btnAll = document.querySelector("#btn-all");
+
+const form = document.querySelector("#card-form");
+
+const inputTitolo = document.querySelector("#titolo");
+const inputSottotitolo = document.querySelector("#sottotitolo");
+const inputTesto = document.querySelector("#testo");
+const inputImmagine = document.querySelector("#immagine");
+
+const formTitle = document.querySelector("#card-form>h3");
+const btnSubmit = document.querySelector("#card-form>button[type='submit']");
+const btnRollbackEdit = document.querySelector("#btn-rollback-edit");
+
+// Variabile per tenere traccia della card in modifica
+let idCardinModifica = null;
+
 
 btnImg.addEventListener("click", () => {
     categoriaAttiva = Categorie.IMMAGINI;
@@ -115,6 +135,67 @@ checkFiltri.addEventListener("change", (e) => {
 
     applicaFiltriGlobali();
 });
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    // RECUPERARE I VALORI DEGLI INPUT
+    const titolo = inputTitolo.value.trim();
+    const sottotitolo = inputSottotitolo.value.trim();
+    const testo = inputTesto.value.trim();
+    const immagine = inputImmagine.value.trim();
+
+    // CONTROLLO VALORI NON VUOTI
+    if (!titolo || titolo.length < 3) {
+        alert("Titolo non valido");
+        return;
+    }
+    if (!sottotitolo || sottotitolo.length < 3) {
+        alert("Sottotitolo non valido");
+        return;
+    }
+    if (!testo) {
+        alert("Testo non valido");
+        return;
+    }
+    // if (immagine.length === 0) alert("Immagine non valida"); CONTROLLO SALTABILE
+
+    if (idCardinModifica !== null){
+        // MODIFICA CARD ESISTENTE
+        const cardTarget = cardList.find(card => card.id === idCardinModifica);
+        if (cardTarget){
+            cardTarget.contenuto.titolo = titolo;
+            cardTarget.contenuto.sottotitolo = sottotitolo;
+            cardTarget.contenuto.testo = testo;
+            cardTarget.contenuto.immagine = immagine;
+        }
+        resetFormModifica();
+    }else{
+        // CREARE NUOVA CARD
+        const nuovaCard = {
+            id: Date.now().toString(),
+            contenuto: {
+                titolo: titolo,
+                sottotitolo: sottotitolo,
+                testo: testo,
+                immagine: immagine,
+            },
+            bordo: {
+                colore: "",
+                stile: "",
+                dimensione: "",
+                raggio: ""
+            }
+        };
+        cardList.push(nuovaCard);
+    }
+
+    // RESET DELLA FORM
+    form.reset();
+
+    // RENDERIZZARE LE CARD NUOVE
+    applicaFiltriGlobali();
+})
 
 
 const Categorie = Object.freeze({
@@ -170,8 +251,6 @@ function applicaFiltriGlobali(){
     // C) Disegnare le card
     renderizzaCards(risCorrenti);
 }
-
-applicaFiltriGlobali();
 
 // -- FN OPERATIVE --
 function disableBtn(btn){
@@ -230,5 +309,90 @@ function createCardElement(cardData){
         cardElement.appendChild(img);
     }
 
+    /**
+     * - margin top: 10px
+     * - flex
+     * - gap: 8px
+     * @type {HTMLDivElement}
+     */
+    const boxAzioni = document
+        .createElement("div");
+    boxAzioni.style.marginTop = "10px";
+    boxAzioni.style.display = "flex";
+    boxAzioni.style.gap = "10px";
+
+    // BTN MODIFICA
+    const btnModifica = document
+        .createElement("button");
+    btnModifica.textContent = "Modifica";
+    btnModifica.style.cursor = "pointer";
+    btnModifica.addEventListener("click", (e) => {
+        e.stopPropagation();
+        preparaModificaCard(cardData);
+    });
+
+    // BTN ELIMINA
+    const btnElimina = document.createElement("button");
+    btnElimina.textContent = "Elimina";
+    btnElimina.style.cursor = "pointer";
+    btnElimina.addEventListener("click", (e) => {
+        e.stopPropagation();
+        eliminaCard(cardData.id);
+    });
+
+    boxAzioni.appendChild(btnModifica);
+    boxAzioni.appendChild(btnElimina);
+
+    cardElement.appendChild(boxAzioni);
+
     return cardElement;
+}
+
+function preparaModificaCard(cardData){
+    // Impostiamo la form in modalità modifica
+    idCardinModifica = cardData.id;
+
+    // Valorizziamo la form con in dati della card da modificare
+    inputTitolo.value = cardData.contenuto.titolo;
+    inputSottotitolo.value = cardData.contenuto.sottotitolo;
+    inputTesto.value = cardData.contenuto.testo;
+    inputImmagine.value = cardData.contenuto.immagine;
+
+    if (formTitle) formTitle.textContent = "Modifica card con ID: " + idCardinModifica;
+    if (btnSubmit) btnSubmit.textContent = "Salva Modifiche";
+    if (btnRollbackEdit) btnRollbackEdit.style.display = "inline-block";
+
+    form.scrollIntoView({behavior: "smooth"});
+}
+
+function resetFormModifica(){
+    idCardinModifica = null;
+
+    if (formTitle) formTitle.textContent = "Crea nuova card";
+    if (btnSubmit) btnSubmit.textContent = "Crea card";
+    if (btnRollbackEdit) btnRollbackEdit.style.display = "none";
+}
+
+function eliminaCard(id){
+    if (!confirm("Vuoi eliminare la card con ID: " + id + "?")) return;
+
+    cardList = cardList.filter(card => card.id !== id);
+
+    if (idCardinModifica === id){
+        form.reset();
+        resetFormModifica();
+    }
+
+    applicaFiltriGlobali();
+}
+
+
+// --- CODICE OPERATIVO ---
+applicaFiltriGlobali();
+
+if (btnRollbackEdit){
+    btnRollbackEdit.addEventListener("click", () => {
+        form.reset();
+        resetFormModifica();
+    });
 }

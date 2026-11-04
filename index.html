@@ -45,44 +45,39 @@
         <label for="enable-adv-filter">Filtri avanzati</label>
 
         <div>
-          <form action="" id="card-form">
-            <!-- 
-            titolo, sottotitolo, testo e img
-             -->
-            <h3>Creazione nuova card</h3>
-
-            <div class="form_input">
-               <label for="titolo">TITOLO</label>
-            <input id="titolo" type="text" placeholder="titolo della card" required>
+          <form id="card-form" method="get">
+            <!--
+              - TITOLO
+              - SOTTOTITOLO
+              - TESTO
+              - IMMAGINE
+            -->
+            <h3>Creazione Nuova Card</h3>
+            <div class="card-form-inputs">
+              <div class="form-input">
+                <label for="titolo">Titolo</label>
+                <input id="titolo" type="text" placeholder="Titolo della card" required>
+              </div>
+              <div class="form-input">
+                <label for="sottotitolo">Sottotitolo</label>
+                <input id="sottotitolo" type="text" placeholder="Sottotitolo della card" required>
+              </div>
+              <div class="form-input">
+                <label for="testo">Testo</label>
+                <input id="testo" type="text" placeholder="Testo della card" required>
+              </div>
+              <div class="form-input">
+                <label for="immagine">Immagine</label>
+                <!--            <input id="immagine" type="text" placeholder="Immagine della card" required>-->
+                <select id="immagine">
+                  <option value="">Nessuna immagine</option>
+                  <option value="TriageColorEntity.jpg">Immagine JPG</option>
+                  <option value="TriageColorEntity.png">Immagine PNG</option>
+                </select>
+              </div>
             </div>
 
-           <div class="form_input">
-             <label for="titolo">TITOLO</label>
-            <input id="titolo" type="text" placeholder="titolo della card" required>
-           </div>
-
-           <div class="form_input">
-            <label for="sottotitolo">SOTTOTITOLO</label>
-            <input type="text" name="" id="sottotitolo" placeholder="sottotitolo della card" required>
-           </div>
-
-           <div class="form_input">
-            <label for="testo">TESTO</label>
-            <input type="text" name="" id="testo" placeholder="testo della card" required>
-           </div>
-
-           <div class="form_input">
-             <label for="immagine">IMMAGINE</label>
-            <!-- <input type="text" name="" id="immagini" placeholder="immagine della card" required> -->
-            <select name="" id="immagine">
-              <option value="">nessuna immagine</option>
-              <option value="JPG">Iimmagine jpg</option>
-              <option value="PNG">Iimmagine png</option>
-            </select>
-           </div>
-
-            <button type="submit">Crea card</button>
-
+            <button type="submit" style="margin-top: 10px">Crea card</button>
           </form>
         </div>
 

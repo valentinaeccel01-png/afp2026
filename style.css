@@ -57,20 +57,32 @@
     background-color: coral;
 }
 
-.form_input{
+#card-form{
+    border: solid 1px grey;
+
+    margin-top: 10px;
+}
+
+.card-form-inputs{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.form-input{
     display: flex;
     flex-direction: column;
     width: 200px;
 }
 
-#card-form{
-    border: solid 1px grey;
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
 
-}
+/**
+    L - I
+    L - I
 
-#card-form>div{
+    L
+    I
 
-}
+
+
+ */
