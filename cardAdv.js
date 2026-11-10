@@ -51,7 +51,7 @@ let cardList = [
             titolo: "Quarto posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Quarto classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "gatto.png" // img
         },
         bordo: {
             colore: "",
@@ -98,6 +98,7 @@ const btnRollbackEdit = document.querySelector("#btn-rollback-edit");
 
 // Variabile per tenere traccia della card in modifica
 let idCardinModifica = null;
+const LOCAL_STORAGE_KEY = "afp_card_list_2026";
 
 
 btnImg.addEventListener("click", () => {
@@ -189,6 +190,8 @@ form.addEventListener("submit", (e) => {
         };
         cardList.push(nuovaCard);
     }
+
+    salvaCardList();
 
     // RESET DELLA FORM
     form.reset();
@@ -384,6 +387,16 @@ function eliminaCard(id){
     }
 
     applicaFiltriGlobali();
+}
+function caricaCardList(){
+
+}
+
+function salvaCardList(){
+    localStorage.setItem(
+        LOCAL_STORAGE_KEY,
+        JSON.stringify(cardList)
+    );
 }
 
 

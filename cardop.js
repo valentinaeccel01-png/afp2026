@@ -6,7 +6,7 @@ const cardList = [
             titolo: "Primo posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Primo classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "gatto.png" // img
         },
         bordo: {
             colore: "",
@@ -48,7 +48,7 @@ const cardList = [
             titolo: "Quarto posto", // h1
             sottotitolo:"Sci aplinismo", // h2
             testo: "Quarto classificato alle olimpiadi", // p
-            immagine: "Federica_Brignone.jpg" // img
+            immagine: "gatto.png" // img
         },
         bordo: {
             colore: "",
