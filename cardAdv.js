@@ -389,7 +389,10 @@ function eliminaCard(id){
     applicaFiltriGlobali();
 }
 function caricaCardList(){
+    const datiSalvati = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (!datiSalvati) return;
 
+    JSON.parse(datiSalvati);
 }
 
 function salvaCardList(){
